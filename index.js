@@ -18,7 +18,15 @@ function Bitmap(filePath) {
 Bitmap.prototype.parse = function(buffer) {
   this.buffer = buffer;
   this.type = buffer.toString('utf-8', 0, 2);
-  //... and so on
+  this.file_size = buffer.readInt16LE(2);
+  this.start_of_pixel = buffer.readInt16LE(10);
+  this.file_width = buffer.readInt32LE(18);
+  this.file_height = buffer.readInt32LE(22);
+  this.bits_per_pix = buffer.readInt16LE(28);
+  this.img_size = buffer.readInt32LE(38);
+  // this.clr_used = buffer.readInt32LE(48);
+  // this.clr_important = buffer.readInt32LE(52);
+  
 };
 
 /**
@@ -27,6 +35,9 @@ Bitmap.prototype.parse = function(buffer) {
  */
 Bitmap.prototype.transform = function(operation) {
   // This is really assumptive and unsafe
+  if(this.type !== 'BM'){
+    return console.log(`Please choose a BM file`);
+  }
   transforms[operation](this);
   this.newFile = this.file.replace(/\.bmp/, `.${operation}.bmp`);
 };
@@ -43,12 +54,37 @@ const transformGreyscale = (bmp) => {
 
   //TODO: Figure out a way to validate that the bmp instance is actually valid before trying to transform it
 
+  
   //TODO: alter bmp to make the image greyscale ...
-
+  let img = bmp.buffer.slice(1146);
+  for(let i = 0; i < img.length; i++){
+    img[i] = (img[i]) + (img[i] * 0.48) + (img[i] * 0.11);
+  }
 };
 
 const doTheInversion = (bmp) => {
-  bmp = {};
+  
+};
+
+const changeThePixelData = (bmp) => {
+  bmp.buffer.writeInt16LE(0x18,28);
+};
+
+const makeItNegative = (bmp) => {
+  let img = bmp.buffer.slice(48);
+  img.swap16();
+  console.log(bmp);
+};
+
+const test = (bmp) => {
+  let img = bmp.buffer.slice(1146);
+  let start = 0;
+  let end = 95;
+  for(let i = 0; i < img.length; i ++){
+    img.slice(start, end);
+    start = end;
+    end += 95;
+  }
 }
 
 /**
@@ -57,7 +93,10 @@ const doTheInversion = (bmp) => {
  */
 const transforms = {
   greyscale: transformGreyscale,
-  invert: doTheInversion
+  invert: doTheInversion,
+  pixel: changeThePixelData,
+  negative: makeItNegative,
+  test: test,
 };
 
 // ------------------ GET TO WORK ------------------- //

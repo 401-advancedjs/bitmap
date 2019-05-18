@@ -12,8 +12,8 @@
 * [front-end](http://xyz.com) (when applicable)
 
 #### Documentation
-* [api docs](http://xyz.com) (API servers)
-* [jsdoc](http://xyz.com) (Server assignments)
+* [bitmap docs](http://www.dragonwins.com/domains/getteched/bmp/bmpfileformat.htm) (API servers)
+* [buffer docs](https://nodejs.org/api/buffer.html) (Server assignments)
 * [styleguide](http://xyz.com) (React assignments)
 
 ### Modules
