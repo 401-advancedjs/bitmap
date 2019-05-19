@@ -6,7 +6,7 @@
 ### Author: Melissa Stock
 
 ### Links and Resources
-* [submission PR](http://xyz.com)
+* [submission PR](https://github.com/401-advancedjs/lab05/pull/1)
 * [travis](https://www.travis-ci.com/401-advancedjs/lab05)
 
 
