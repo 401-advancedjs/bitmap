@@ -1,47 +1,45 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## Project Name
+## Bitmap and Buffers
 
-### Author: Student/Group Name
+### Author: Melissa Stock
 
 ### Links and Resources
 * [submission PR](http://xyz.com)
-* [travis](http://xyz.com)
-* [back-end](http://xyz.com) (when applicable)
-* [front-end](http://xyz.com) (when applicable)
+* [travis](https://www.travis-ci.com/401-advancedjs/lab05)
+
 
 #### Documentation
-* [bitmap docs](http://www.dragonwins.com/domains/getteched/bmp/bmpfileformat.htm) (API servers)
-* [buffer docs](https://nodejs.org/api/buffer.html) (Server assignments)
-* [styleguide](http://xyz.com) (React assignments)
+* [bitmap docs](http://www.dragonwins.com/domains/getteched/bmp/bmpfileformat.htm)
+* [bitmap docs](http://www.dragonwins.com/domains/getteched/bmp/bmpfileformat.htm) 
+* [buffer docs](https://nodejs.org/api/buffer.html)
 
 ### Modules
-#### `modulename.js`
+#### `bitmap.js`
+#### `transform.js`
 ##### Exported Values and Methods
 
-###### `foo(thing) -> string`
-Usage Notes or examples
-
-###### `bar(array) -> array`
-Usage Notes or examples
-
-### Setup
-#### `.env` requirements
-* `PORT` - Port Number
-* `MONGODB_URI` - URL to the running mongo instance/db
+###### `bitmap(file) -> new bitmap`
+###### `trasforms(operation) -> transformed bitmap`
 
 #### Running the app
-* `npm start`
+* `node index.js assets/[FILE_NAME] [OPERATION]`
 * Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
+  * Returns a new bitmap with specified operation done to it
   
 #### Tests
-* How do you run tests?
+* How do you run tests? `npm test`
 * What assertions were made?
+  * Details of the BM are stored in an object
+  * BMs are transformed when a valid operation is inputed
+  * Error is thrown if an invalid path is inputed
+  * Error is thrown is an invalid operation is inputed
 * What assertions need to be / should be made?
 
-#### UML
-Link to an image of the UML for your application and response to events
+#### Getting inputs from the command line
+* How does this command work? `const [file, operation] = process.argv.slice(2);`
+  * argv is an array that contains everything typed into the command line. In this app it looks like: [node, name of file you're running the command on, file path, operation]. We use slice with the argument 2 to disgard the first two indecies. We store the remaining two arguments as variables 'file' and 'operation'.
+
+
+
